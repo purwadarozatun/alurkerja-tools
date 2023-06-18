@@ -1,0 +1,96 @@
+#! /usr/bin/env node
+const Scaffold = require('scaffold-generator')
+const mustache = require('mustache')
+const fs = require('fs');
+const yargs = require('yargs')
+
+const axios = require("axios");
+
+
+
+var template = yargs.argv.template
+var specUrl = yargs.argv.specurl
+
+var templateBaseCode = process.cwd() + '/bin/template/'
+
+var templateCode = templateBaseCode + template
+
+fs.access(templateCode, fs.constants.F_OK, (err) => {
+  
+  if (err) {
+    console.log(`Template ${template} Not Found   Avaiable Template`);
+    console.table(fs.readdirSync(templateBaseCode).filter(function (file) {
+      return fs.statSync(templateBaseCode + '/' + file).isDirectory();
+    }));
+
+    return;
+  } else {
+
+
+    console.log(`Template ${template} Found `);
+    console.log(`Fetching Spec Url From ${specUrl}`);
+    axios.get(specUrl)
+      .then(function (response) {
+        // handle success
+        const data = (response.data.data);
+
+        if (data.is_bpmn) {
+          generateBpmn(data, templateCode)
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        console.log("Fetch Finished")
+      });
+
+
+
+  }
+});
+
+
+const titleCase = (s) =>
+  s
+    .split("_")
+    .filter(x => x.length > 0)
+    .map((x) => (x.charAt(0).toUpperCase() + x.slice(1)))
+    .join("");
+
+
+
+function doGenerateSacaffond(data, template, destination) {
+
+  mustache.escape = v => v
+
+
+  new Scaffold({
+    data: data,
+    // function `options.render` accepts `str` and `data`, then returns a `str`
+    render: mustache.render
+  })
+    .copy(template, destination)
+    .then(() => {
+      console.log('done')
+    })
+
+}
+
+function generateBpmn(spec, template, withUsertask = true) {
+
+  console.log(titleCase(spec.name));
+
+  doGenerateSacaffond({
+    processName: titleCase(spec.name),
+  }, template + "/bpmn", "./path/to")
+
+
+  spec.usertask_mapping.map((item) => {
+
+    doGenerateSacaffond({
+      userTask: titleCase(item.id),
+    }, template + "/usertask", "./path/to/usertask")
+  })
+}

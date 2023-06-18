@@ -1,0 +1,1 @@
+<?php echo "ini crud nya ya untuk {{Crud}}"?>

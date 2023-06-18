@@ -1,0 +1,18 @@
+{
+    "parameter": [
+        "Crud",
+        "module"
+    ],
+    "method": "copyMethod",
+    "scaffond_config": {
+        "controller": {
+            "from": "controller",
+            "to": "./resources/js/components/Crud/Api/controller"
+        },
+        "service": {
+            "from": "service",
+            "to": "./resources/js/components/Crud/Api/service"
+        }
+    },
+    "after_generate_message" : "Oke siap ,  wes ta generatein crudne {{Crud}} di module {{module}}"
+}

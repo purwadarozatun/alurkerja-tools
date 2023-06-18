@@ -1,0 +1,22 @@
+{
+    "parameter": [
+        "specUrl",
+        "modulePath"
+    ],
+    "method": "generateBpmn",
+    "scaffond_config": {
+        "bpmn": {
+            "from": "bpmn",
+            "to": "resources/js/components/{{modulePath}}/main-app/{{bpmn}}"
+        },
+        "usertask": {
+            "from": "usertask",
+            "to": "resources/js/components/{{modulePath}}/main-app/{{bpmn}}/usertask/{{usertask}}"
+        },
+        "root": {
+            "from": "root",
+            "to": "resources/js/components/{{modulePath}}/main-app"
+        }
+    },
+    "after_generate_message" : "############################################################################################### \nTerimakasih sudah menggunakan \nSilahkan tambahkan `resources/js/components/{{modulePath}}/main-app/RootIndex` ke `resources/js/app.js` \nBiasanya formatnya  `import './components/{{modulePath}}/main-app/RootIndex';` \n###############################################################################################"
+}
