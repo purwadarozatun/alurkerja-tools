@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { AlurkerjaForm } from 'alurkerja-ui'
 
 const Edit = () => {
 
   let { id } = useParams();
+  const navigate = useNavigate()
   const { formState, handleSubmit, control, setValue } = useForm()
 
   return (
@@ -16,6 +17,7 @@ const Edit = () => {
       handleSubmit={handleSubmit}
       control={control}
       setValue={setValue}
+      onCancel={() => navigate(-1)}    
     />
   )
 }

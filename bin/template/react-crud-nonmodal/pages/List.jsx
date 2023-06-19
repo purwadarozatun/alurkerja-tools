@@ -24,7 +24,7 @@ const List = () => {
       search={search}
       setSearch={setSearch}
       onClickCreate={() => navigate('create')}
-      onClickEdit={(id) => navigate(`edit/${id}`)}
+      onClickEdit={(_,id) => navigate(`edit/${id}`)}
       onClickDetail={(id) => navigate(`detail/${id}`)}
     />
   )
