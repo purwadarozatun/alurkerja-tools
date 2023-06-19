@@ -2,7 +2,7 @@
 const { default: axios } = require('axios');
 const mustache = require('mustache')
 const yargs = require('yargs')
-const { doGenerateSacaffond, titleCase, camelToSnakeCase, toKebabCase, toPascalCase } = require('../helper/GenerateHelper.js')
+const { doGenerateSacaffond, titleCase, camelToSnakeCase } = require('../helper/GenerateHelper.js')
 
 const operation = (json, withTemplate) => {
   const scaffond_config = (json.scaffond_config);
@@ -27,6 +27,14 @@ const operation = (json, withTemplate) => {
     return false
   }
 
+
+
+  var formatTo = mustache.render(scaffond_config['root']['to'], params)
+
+  doGenerateSacaffond(params, withTemplate + "/" + scaffond_config['root']["from"], formatTo)
+
+
+
   axios.get(params.specUrl)
     .then(function (response) {
       // handle success
@@ -42,11 +50,15 @@ const operation = (json, withTemplate) => {
 
         console.log("Geneate BPMN " + data.name)
         doGenerateSacaffond(params, withTemplate + "/" + scaffond_config['bpmn']['from'], formatTo)
+
+
+
         data.usertask_mapping.map((item) => {
+
           params = {
             ...params, 
             ...{
-              usertask: toKebabCase(item.id),
+              usertask: camelToSnakeCase(item.id),
               bpmn: camelToSnakeCase(data.name),
             },
           }
@@ -69,5 +81,8 @@ const operation = (json, withTemplate) => {
 
 
 }
+
+
+
 
 module.exports = operation;

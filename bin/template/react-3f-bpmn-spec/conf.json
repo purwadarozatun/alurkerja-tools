@@ -3,7 +3,7 @@
         "specUrl",
         "modulePath"
     ],
-    "method": "generateBpmnNoRoot",
+    "method": "generateBpmn",
     "scaffond_config": {
         "bpmn": {
             "from": "bpmn",

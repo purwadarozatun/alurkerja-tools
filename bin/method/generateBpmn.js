@@ -2,17 +2,15 @@
 const { default: axios } = require('axios');
 const mustache = require('mustache')
 const yargs = require('yargs')
-const { doGenerateSacaffond, titleCase, camelToSnakeCase } = require('../helper/GenerateHelper.js')
+const { doGenerateSacaffond, titleCase, camelToSnakeCase, toKebabCase, toPascalCase } = require('../helper/GenerateHelper.js')
 
 const operation = (json, withTemplate) => {
   const scaffond_config = (json.scaffond_config);
-
-
-  var params = {}
+  var params = {};
   var valid = true;
 
   json.parameter.forEach(function (value) {
-    const param = yargs.argv[value]
+    const param = yargs.argv[value];
 
     if (!param) {
       valid = false
@@ -20,69 +18,50 @@ const operation = (json, withTemplate) => {
     }
     params[value] = param
 
-  })
-
+  });
 
   if (!valid) {
     return false
   }
 
-
-
-  var formatTo = mustache.render(scaffond_config['root']['to'], params)
-
-  doGenerateSacaffond(params, withTemplate + "/" + scaffond_config['root']["from"], formatTo)
-
-
-
   axios.get(params.specUrl)
-    .then(function (response) {
-      // handle success
-      const data = (response.data.data);
+      .then(function (response) {
+        // handle success
+        const data = (response.data.data);
 
-      if (data.is_bpmn) {
+        if (data.is_bpmn) {
 
-        console.log(titleCase(data.name));
-        params = {
-          ...params, ...{ bpmn: camelToSnakeCase(data.name) },
-        }
-        var formatTo = mustache.render(scaffond_config['bpmn']['to'],params)
-
-        console.log("Geneate BPMN " + data.name)
-        doGenerateSacaffond(params, withTemplate + "/" + scaffond_config['bpmn']['from'], formatTo)
-
-
-
-        data.usertask_mapping.map((item) => {
-
+          console.log(titleCase(data.name));
           params = {
-            ...params, 
-            ...{
-              usertask: camelToSnakeCase(item.id),
-              bpmn: camelToSnakeCase(data.name),
-            },
-          }
-          var userTaskTo = mustache.render(scaffond_config['usertask']['to'], params)
-          console.log(`Genearting Usertask ${item.id} `)
-          doGenerateSacaffond(params, withTemplate + "/" + scaffond_config['usertask']['from'], userTaskTo)
-        })
-      }
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .finally(function () {
+            ...params, ...{ bpmn: camelToSnakeCase(data.name) },
+          };
+          var formatTo = mustache.render(scaffond_config['bpmn']['to'],params)
 
-      var afterMessage = mustache.render(json['after_generate_message'], params)
-      console.log(afterMessage)
-    });
+          console.log("Geneate BPMN " + data.name)
+          doGenerateSacaffond(params, withTemplate + "/" + scaffond_config['bpmn']['from'], formatTo)
+          data.usertask_mapping.map((item) => {
+            params = {
+              ...params,
+              ...{
+                usertask: toKebabCase(item.id),
+                bpmn: camelToSnakeCase(data.name),
+              },
+            };
+            var userTaskTo = mustache.render(scaffond_config['usertask']['to'], params)
+            console.log(`Genearting Usertask ${item.id} `)
+            doGenerateSacaffond(params, withTemplate + "/" + scaffond_config['usertask']['from'], userTaskTo)
+          })
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
 
-
-
-}
-
-
-
+        var afterMessage = mustache.render(json['after_generate_message'], params)
+        console.log(afterMessage)
+      });
+};
 
 module.exports = operation;
