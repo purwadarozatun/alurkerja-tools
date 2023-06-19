@@ -3,7 +3,7 @@
         "specUrl",
         "modulePath"
     ],
-    "method": "generateBpmn",
+    "method": "generateBpmnNoRoot",
     "scaffond_config": {
         "bpmn": {
             "from": "bpmn",
@@ -12,10 +12,6 @@
         "usertask": {
             "from": "usertask",
             "to": "resources/js/components/{{modulePath}}/{{bpmn}}/usertask/{{usertask}}"
-        },
-        "root": {
-            "from": "root",
-            "to": "resources/js/components/{{modulePath}}"
         }
     },
     "after_generate_message" : "############################################################################################### \nTerimakasih sudah menggunakan \n kamu bisa akses path: /{{modulePath}}/bpmn/{{modulePath}}/{task-yg-ada-di-bpmn}/{nama-file}` \n contoh: /pbpbb/bpmn/pb-pra-perkhidmatan/kemaskini-maklumat/index \n###############################################################################################"
