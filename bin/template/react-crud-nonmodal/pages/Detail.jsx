@@ -1,6 +1,7 @@
-import React from 'react'
+
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { AlurkerjaForm } from 'alurkerja-ui'
 
 const Detail = () => {
 
