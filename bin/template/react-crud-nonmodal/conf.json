@@ -1,0 +1,14 @@
+{
+    "parameter": [
+        "modulePath"
+    ],
+    "method": "copyMethod",
+    "scaffond_config": {
+        "pages": {
+            "from": "pages",
+            "to": "src/pages/{{modulePath}}/"
+        }
+       
+    },
+    "after_generate_message" : "Pada file src/pages/{{modulePath}}/*.jsx ubah `tableName` dan `baseUrl` \n tambahkan routing juga untuk /{{modulePath}}, /{{modulePath}}/create, /{{modulePath}}/detail/:id,/{{modulePath}}/edit/:id"
+}
