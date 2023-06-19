@@ -14,5 +14,5 @@
             "to": "resources/js/components/{{modulePath}}/{{bpmn}}/usertask/{{usertask}}"
         }
     },
-    "after_generate_message" : "Terimakasih sudah menggunakan \n kamu bisa akses path: /{module}/bpmn/{{modulePath}}/{nama-file} & /{module}/bpmn/{{modulePath}}/{task-definition-key}/{nama-file} \n contoh: \n /pbpbb/bpmn/pb-pra-perkhidmatan/index \n /pbpbb/bpmn/pb-pra-perkhidmatan/kemaskini-maklumat/index"
+    "after_generate_message" : "Terimakasih sudah menggunakan \n kamu bisa akses path: /{{modulePath}}/bpmn/{{bpmn}}/{nama-file} & /{{modulePath}}/bpmn/{{bpmn}}/{task-definition-key}/{nama-file}"
 }
