@@ -4,7 +4,7 @@ const mustache = require('mustache')
 const yargs = require('yargs')
 const { doGenerateSacaffond, titleCase, camelToSnakeCase, toKebabCase, toPascalCase } = require('../helper/GenerateHelper.js')
 
-const operation = (json, withTemplate) => {
+const generateBpmnNoRoot = (json, withTemplate) => {
   const scaffond_config = (json.scaffond_config);
 
 
@@ -70,7 +70,4 @@ const operation = (json, withTemplate) => {
 
 }
 
-
-
-
-module.exports = operation;
+module.exports = generateBpmnNoRoot;
