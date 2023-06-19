@@ -33,4 +33,17 @@ setelah itu buatlah file `conf.json` dengan isi kurang lebih seperti di bawah in
 }
 ```
 
-Penjelasan 
+### Penjelasan
+pada file conf.json  terdapat beberapa object yaitu 
+1. Parameter
+Parameter yang di gunakan untuk mengeksekusi command dari template yang sudah  di definisikan sehingga user akan diberikan informasi terkait dengan parameter required yang sudah di definisikan di parameter
+
+3. method
+method/ metode yang di gunakan method ini di daftarkan pada folder method  yang berisi file js 
+4. scaffold_config
+
+Parameter config berisi  object dari operasi yang di buat ,  contoh  controller akan mengeksekusi copy dari field `from`  ke field `to`
+
+6. after_generate_message
+
+Message yang akan dimunculkan ketika command selesai di exsekusi  bertujuan untuk memberikan informasi  
