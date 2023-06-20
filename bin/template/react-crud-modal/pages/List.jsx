@@ -10,8 +10,8 @@ const List = () => {
 
   return (
     <TableLowcode
-      baseUrl=''
-      tableName=''
+      baseUrl='{{baseUrl}}'
+      tableName='{{tableName}}'
       renderState={renderState}
       setRenderState={setRenderState}
       pageConfig={pageConfig}

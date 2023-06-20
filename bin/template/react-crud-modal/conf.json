@@ -1,6 +1,8 @@
 {
     "parameter": [
-        "modulePath"
+        "modulePath",
+        "tableName", 
+        "baseUrl"
     ],
     "method": "copyMethod",
     "scaffond_config": {
