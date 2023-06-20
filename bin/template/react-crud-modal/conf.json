@@ -1,0 +1,14 @@
+{
+    "parameter": [
+        "modulePath"
+    ],
+    "method": "copyMethod",
+    "scaffond_config": {
+        "pages": {
+            "from": "pages",
+            "to": "src/pages/{{modulePath}}/"
+        }
+       
+    },
+    "after_generate_message" : "Pada file src/pages/{{modulePath}}/list.jsx ubah `tableName` dan `baseUrl` \n pada file routing juga tambahkan route untuk /{{modulePath}}"
+}

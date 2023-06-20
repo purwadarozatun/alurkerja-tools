@@ -3,20 +3,16 @@
         "specUrl",
         "modulePath"
     ],
-    "method": "generateBpmn",
+    "method": "generateBpmnNoRoot",
     "scaffond_config": {
         "bpmn": {
             "from": "bpmn",
-            "to": "resources/js/components/{{modulePath}}/main-app/{{bpmn}}"
+            "to": "resources/js/components/{{modulePath}}/{{bpmn}}"
         },
         "usertask": {
             "from": "usertask",
-            "to": "resources/js/components/{{modulePath}}/main-app/{{bpmn}}/usertask/{{usertask}}"
-        },
-        "root": {
-            "from": "root",
-            "to": "resources/js/components/{{modulePath}}/main-app"
+            "to": "resources/js/components/{{modulePath}}/{{bpmn}}/usertask/{{usertask}}"
         }
     },
-    "after_generate_message" : "############################################################################################### \nTerimakasih sudah menggunakan \nSilahkan tambahkan `resources/js/components/{{modulePath}}/main-app/RootIndex` ke `resources/js/app.js` \nBiasanya formatnya  `import './components/{{modulePath}}/main-app/RootIndex';` \n###############################################################################################"
+    "after_generate_message" : "Terimakasih sudah menggunakan \n kamu bisa akses path: /{{modulePath}}/bpmn/{{bpmn}}/{nama-file} & /{{modulePath}}/bpmn/{{bpmn}}/{task-definition-key}/{nama-file}"
 }
