@@ -18,13 +18,13 @@ var templateBaseCode = alurkerjaToolsHome + '/bin/template/'
 var templateCode = templateBaseCode + template
 
 fs.access(alurkerjaToolsHome, fs.constants.F_OK, async (err) => {
-  // if (err) {
-  //   console.log('Template Not exsist cloning template')
-  //   await simpleGit().clone('https://github.com/purwadarozatun/alurkerja-tools', alurkerjaToolsHome)
-  // } else {
-  //   console.log('Teplate Already  Exsist , Updating Template')
-  //   await simpleGit(alurkerjaToolsHome).pull('origin', 'main', { '--rebase': 'true' })
-  // }
+  if (err) {
+    console.log('Template Not exsist cloning template')
+    await simpleGit().clone('https://github.com/purwadarozatun/alurkerja-tools', alurkerjaToolsHome)
+  } else {
+    console.log('Teplate Already  Exsist , Updating Template')
+    await simpleGit(alurkerjaToolsHome).pull('origin', 'main', { '--rebase': 'true' })
+  }
 
   await fs.access(templateCode, fs.constants.F_OK, async (err) => {
     if (err) {
@@ -47,7 +47,8 @@ fs.access(alurkerjaToolsHome, fs.constants.F_OK, async (err) => {
         const json = JSON.parse(data)
 
         const methodName = json['method']
-        const method = require('./method/' + methodName + '.js')
+        console.log(methodName)
+        const method = require(process.cwd() + '/bin/method/' + methodName + '.js')
 
         method(json, withTemplate)
       })
