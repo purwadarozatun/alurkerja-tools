@@ -39,6 +39,7 @@ const operation = (json, withTemplate) => {
 
         var importStatement =  `import React from "react";\nimport {\n\n`
         var importRoutesStatement =  `const routes = (): { [url: string]: React.ReactNode } => ({\n`
+        var importMenuStatement =  `const routes = (): { [url: string]: React.ReactNode } => ({\n`
 
         
         
@@ -71,12 +72,21 @@ const operation = (json, withTemplate) => {
 
             importRoutesStatement += `   "/${item.id}": <${_.startCase(item.id)} />,\n`
             importRoutesStatement += `   "/${item.id}/create": <${_.startCase(item.id)}Create />,\n`
+
+
+            importRoutesStatement += `   "/${item.id}": ["${_.startCase(item.id)}", "Magna sunt adipisicing ullamco est ipsum."],\n`
+
+
+
+  
+
           })
 
 
           importStatement += `} from "@/pages/${_.startCase(spec.name)}";`
 
           importRoutesStatement += `});\nexport default routes;`
+          importMenuStatement += `});\nexport default routes;`
 
           console.log(exportComponent)
 
@@ -104,6 +114,14 @@ const operation = (json, withTemplate) => {
             bpmnName:(spec.name),
 
           }, withTemplate + '/' + scaffond_config['routeIndex']['from'] , pagesRouteTo)
+
+
+          const pagesMenuTo = mustache.render(scaffond_config['menuIndex']['to'], routeParams)
+          doGenerateSacaffond({
+            importComponent:  importMenuStatement,
+            bpmnName:(spec.name),
+
+          }, withTemplate + '/' + scaffond_config['menuIndex']['from'] , pagesMenuTo)
 
 
           // console.log(routeParams, 'route params', scaffond_config['routes']['to'])
