@@ -4,11 +4,11 @@
   "scaffond_config": {
     "pages": {
       "from": "pages",
-      "to": "src/pages/{{pageName}}"
+      "to": "src/pages/"
     },
-    "routes": {
-      "from": "routes",
-      "to": "src/routes/{{name}}"
+    "pagesindex": {
+      "from": "pagesindex",
+      "to": "src/pages/{{bpmnName}}"
     }
   },
   "after_generate_message": "berhasil generate routes dan pages"

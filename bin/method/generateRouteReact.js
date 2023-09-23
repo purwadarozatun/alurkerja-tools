@@ -1,6 +1,7 @@
 const { default: axios } = require('axios')
 const mustache = require('mustache')
 const yargs = require('yargs')
+const _ = require('lodash')
 const { doGenerateSacaffond, titleCase, camelToSnakeCase } = require('../helper/GenerateHelper.js')
 /**
  *
@@ -36,12 +37,22 @@ const operation = (json, withTemplate) => {
         console.log('success getting spec')
         const spec = response.data.data
 
+        var importStatement =  `import React from "react";\nimport {`
+
+        
+        
+        var importComponent = 'const routes = (): { [url: string]: React.ReactNode } => ({\n'
+
+        
+        
+
         if (spec.is_bpmn) {
           spec.usertask_mapping.forEach((item) => {
             console.log(item)
             params = {
-              pageName: item.id,
+              usertaskName: _.startCase(item.id),
               baseUrl: params.baseUrl,
+              bpmnName: _.startCase(spec.name),
               specPath: item.url,
             }
             var pagesFormatTo = mustache.render(scaffond_config['pages']['to'], params)
@@ -49,15 +60,40 @@ const operation = (json, withTemplate) => {
             console.log('Geneate Pages ' + spec.name)
             doGenerateSacaffond(params, withTemplate + `/` + scaffond_config['pages']['from'], pagesFormatTo)
             console.log('done')
+
+            importStatement += `${_.startCase(item.id)},\n${_.startCase(item.id)}Create,\n`
+
+            // importComponent += `export * from './${(item.id)}/${(item.id)}'\n`
+            importComponent += `   "/${item.id}": <${_.startCase(item.id)} />,\n`
+            importComponent += `   "/${item.id}/create": <${_.startCase(item.id)}Create />,\n`
           })
 
+
+          importStatement += `} from "@/pages/${_.startCase(spec.name)}";`
+
+          importComponent += `});\nexport default routes;`
+
+          console.log(importStatement + "\n\n" +importComponent)
           const routeParams = {
-            name: spec.name,
+            pageName: spec.name,
+            bpmnName : _.startCase(spec.name),
           }
 
-          var routesFormatTo = mustache.render(scaffond_config['routes']['to'], routeParams)
-          console.log('Geneate Routes ' + spec.name)
-          doGenerateSacaffond(routeParams, withTemplate + '/' + scaffond_config['routes']['from'], routesFormatTo)
+
+          
+
+          const pagesIndexTo = mustache.render(scaffond_config['pagesindex']['to'], routeParams)
+          doGenerateSacaffond({
+            importComponent: importStatement + "\n\n" +importComponent,
+          }, withTemplate + '/' + scaffond_config['pagesindex']['from'] , pagesIndexTo)
+
+
+          // console.log(routeParams, 'route params', scaffond_config['routes']['to'])
+
+          // var routesFormatTo = mustache.render(scaffond_config['routes']['to'], routeParams)
+          // console.log('Geneate Routes ' + spec.name,  routesFormatTo)
+          
+          // doGenerateSacaffond(routeParams, withTemplate + '/' + scaffond_config['routes']['from'] , routesFormatTo)
         }
       }
     })
