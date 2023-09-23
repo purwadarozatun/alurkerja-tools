@@ -48,7 +48,7 @@ const operation = (json, withTemplate) => {
           spec.usertask_mapping.forEach((item) => {
             console.log(item)
             params = {
-              name: item.id,
+              pageName: item.id,
               baseUrl: params.baseUrl,
               specPath: item.url,
             }

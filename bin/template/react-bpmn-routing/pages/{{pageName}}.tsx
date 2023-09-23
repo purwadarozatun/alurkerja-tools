@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { AlurkerjaForm } from 'alurkerja-ui'
 
-export const {{name}}Page= () => {
+export const {{paegName}}= () => {
   const baseUrl = '{{baseUrl}}'
   const specPath = '{{specPath}}/spec'
 
