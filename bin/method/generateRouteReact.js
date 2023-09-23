@@ -49,8 +49,8 @@ const operation = (json, withTemplate) => {
         
 
 
-        exportComponent += `export * from './Start${_.startCase(spec.name)}';\n`
-        exportComponent += `export * from './Start${_.startCase(spec.name)}Create';\n`
+        exportComponent += `export * from './Start${_.startCase(spec.name)}/Start${_.startCase(spec.name)}';\n`
+        exportComponent += `export * from './Start${_.startCase(spec.name)}Create/Start${_.startCase(spec.name)}Create';\n`
 
         importStatement += `Start${_.startCase(spec.name)},\nStart${_.startCase(spec.name)}Create,\n`
         importRoutesStatement += `   "/${spec.name}": <Start${_.startCase(spec.name)} />,\n`
