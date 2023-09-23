@@ -1,0 +1,15 @@
+{
+  "parameter": ["baseUrl", "specPath"],
+  "method": "generateRouteReact",
+  "scaffond_config": {
+    "pages": {
+      "from": "pages",
+      "to": "src/pages/{{name}}"
+    },
+    "routes": {
+      "from": "routes",
+      "to": "src/routes/{{name}}"
+    }
+  },
+  "after_generate_message": "berhasil generate routes dan pages"
+}

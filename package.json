@@ -61,7 +61,12 @@
     "yargs": "^17.7.2",
     "yargs-parser": "^21.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react": "^18.2.22",
+    "alurkerja-ui": "^0.0.361",
+    "react-hook-form": "7.46.1",
+    "react-router-dom": "^6.16.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
