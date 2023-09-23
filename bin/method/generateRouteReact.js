@@ -48,6 +48,15 @@ const operation = (json, withTemplate) => {
         
         
 
+
+        exportComponent += `export * from './Start${_.startCase(spec.name)}';\n`
+        exportComponent += `export * from './Start${_.startCase(spec.name)}Create';\n`
+
+        importStatement += `Start${_.startCase(spec.name)},\nStart${_.startCase(spec.name)}Create,\n`
+        importRoutesStatement += `   "/${spec.name}": <Start${_.startCase(spec.name)} />,\n`
+        importRoutesStatement += `   "/${spec.name}": <Start${_.startCase(spec.name)}Create />,\n`
+        importMenuStatement += `   "/${spec.name}": ["Start ${_.startCase(spec.name)}", "Magna sunt adipisicing ullamco est ipsum."],\n`
+
         if (spec.is_bpmn) {
           spec.usertask_mapping.forEach((item) => {
             console.log(item)
