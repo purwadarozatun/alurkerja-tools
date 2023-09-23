@@ -12,7 +12,7 @@
     },
     "routeIndex": {
       "from": "routeIndex",
-      "to": "src/routes/{{bpmnName}}_components.tsx"
+      "to": "src/routes"
     }
   },
   "after_generate_message": "berhasil generate routes dan pages"
