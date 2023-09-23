@@ -5,9 +5,10 @@ const { doGenerateSacaffond, titleCase, camelToSnakeCase } = require('../helper/
 /**
  *
  * @param {*} json json diambil dari conf.json dari folder template
- * @param {*} withTemplate
+ * @param {*} withTemplate route tempalte
  */
 const operation = (json, withTemplate) => {
+  console.log(withTemplate, 'wth')
   const scaffond_config = json.scaffond_config
 
   var params = {}
@@ -36,15 +37,6 @@ const operation = (json, withTemplate) => {
         const spec = response.data.data
 
         if (spec.is_bpmn) {
-          params = {
-            ...params,
-          }
-
-          var routesFormatTo = mustache.render(scaffond_config['routes']['to'], params)
-
-          console.log('Geneate Routes ' + spec.name)
-          doGenerateSacaffond(params, withTemplate + '/' + scaffond_config['pages']['from'], routesFormatTo)
-
           spec.usertask_mapping.forEach((item) => {
             console.log(item)
             params = {
@@ -55,9 +47,17 @@ const operation = (json, withTemplate) => {
             var pagesFormatTo = mustache.render(scaffond_config['pages']['to'], params)
 
             console.log('Geneate Pages ' + spec.name)
-            doGenerateSacaffond(params, withTemplate + `/${item.id}` + scaffond_config['pages']['from'], pagesFormatTo)
+            doGenerateSacaffond(params, withTemplate + `/` + scaffond_config['pages']['from'], pagesFormatTo)
             console.log('done')
           })
+
+          const routeParams = {
+            name: spec.name,
+          }
+
+          var routesFormatTo = mustache.render(scaffond_config['routes']['to'], routeParams)
+          console.log('Geneate Routes ' + spec.name)
+          doGenerateSacaffond(routeParams, withTemplate + '/' + scaffond_config['routes']['from'], routesFormatTo)
         }
       }
     })
