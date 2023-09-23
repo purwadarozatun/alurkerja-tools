@@ -74,7 +74,7 @@ const operation = (json, withTemplate) => {
             importRoutesStatement += `   "/${item.id}/create": <${_.startCase(item.id)}Create />,\n`
 
 
-            importRoutesStatement += `   "/${item.id}": ["${_.startCase(item.id)}", "Magna sunt adipisicing ullamco est ipsum."],\n`
+            importMenuStatement += `   "/${item.id}": ["${_.startCase(item.id)}", "Magna sunt adipisicing ullamco est ipsum."],\n`
 
 
 
