@@ -48,7 +48,7 @@ fs.access(alurkerjaToolsHome, fs.constants.F_OK, async (err) => {
 
         const methodName = json['method']
         console.log(methodName)
-        const method = require(process.cwd() + '/bin/method/' + methodName + '.js')
+        const method = require('./method/' + methodName + '.js')
 
         method(json, withTemplate)
       })
