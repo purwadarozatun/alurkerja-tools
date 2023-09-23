@@ -52,6 +52,7 @@ const operation = (json, withTemplate) => {
               baseUrl: params.baseUrl,
               specPath: item.url,
             }
+            var pagesFormatTo = mustache.render(scaffond_config['pages']['to'], params)
 
             console.log('Geneate Pages ' + spec.name)
             doGenerateSacaffond(params, withTemplate + `/${item.id}` + scaffond_config['pages']['from'], pagesFormatTo)
@@ -61,6 +62,7 @@ const operation = (json, withTemplate) => {
       }
     })
     .catch((error) => {
+      console.log(error)
       console.log('gagal mendapatkan spec')
     })
   // .finally(() => {
