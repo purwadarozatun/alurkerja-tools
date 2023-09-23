@@ -42,7 +42,7 @@ const operation = (json, withTemplate) => {
 
         
         
-        var exportComponent = 'const routes = (): { [url: string]: React.ReactNode } => ({\n'
+        var exportComponent = ''
 
         
         
