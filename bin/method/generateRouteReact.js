@@ -37,7 +37,8 @@ const operation = (json, withTemplate) => {
         console.log('success getting spec')
         const spec = response.data.data
 
-        var importStatement =  ""
+        var importStatement =  `import React from "react";\nimport {\n\n`
+        var importRoutesStatement =  `const routes = (): { [url: string]: React.ReactNode } => ({\n`
 
         
         
@@ -59,22 +60,28 @@ const operation = (json, withTemplate) => {
 
             console.log('Geneate Pages ' + spec.name)
             doGenerateSacaffond(params, withTemplate + `/` + scaffond_config['pages']['from'], pagesFormatTo)
-            console.log('done')
+            console.log('done') 
 
-            // importStatement += `${_.startCase(item.id)},\n${_.startCase(item.id)}Create,\n`
+            importStatement += `${_.startCase(item.id)},\n`
+            importStatement += `${_.startCase(item.id)}Create,\n`
 
             exportComponent += `export * from './${_.startCase(item.id)}/${_.startCase(item.id)}';\n`
             exportComponent += `export * from './${_.startCase(item.id)}/${_.startCase(item.id)}Create';\n`
-            importStatement += `   "/${item.id}": <${_.startCase(item.id)} />,\n`
-            importStatement += `   "/${item.id}/create": <${_.startCase(item.id)}Create />,\n`
+
+
+            importRoutesStatement += `   "/${item.id}": <${_.startCase(item.id)} />,\n`
+            importRoutesStatement += `   "/${item.id}/create": <${_.startCase(item.id)}Create />,\n`
           })
 
 
           importStatement += `} from "@/pages/${_.startCase(spec.name)}";`
 
-          importStatement += `});\nexport default routes;`
+          importRoutesStatement += `});\nexport default routes;`
 
           console.log(exportComponent)
+
+
+          
           console.log(importStatement)
           const routeParams = {
             pageName: spec.name,
@@ -93,7 +100,9 @@ const operation = (json, withTemplate) => {
 
           const pagesRouteTo = mustache.render(scaffond_config['routeIndex']['to'], routeParams)
           doGenerateSacaffond({
-            importComponent:  importStatement,
+            importComponent:  importStatement + '\n\n' + importRoutesStatement,
+            bpmnName:(spec.name),
+
           }, withTemplate + '/' + scaffond_config['routeIndex']['from'] , pagesRouteTo)
 
 
