@@ -1,0 +1,20 @@
+{
+    "parameter": ["baseUrl", "specPath"],
+    "method": "generateRouteReact",
+    "scaffond_config": {
+      "pages": {
+        "from": "bpmn",
+        "to": "src/pages/"
+      },
+      "pagesindex": {
+        "from": "bpmn_index",
+        "to": "src/pages/{{bpmnName}}"
+      },
+      "usindex": {
+        "from": "us_index",
+        "to": "src/pages/{{bpmnName}}"
+      }
+    },
+    "after_generate_message": "berhasil generate routes dan pages"
+  }
+  
