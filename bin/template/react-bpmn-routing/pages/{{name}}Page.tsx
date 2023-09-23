@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { AlurkerjaForm } from 'alurkerja-ui'
 
-const Page = () => {
+export const {{name}}Page= () => {
   const baseUrl = '{{baseUrl}}'
   const specPath = '{{specPath}}/spec'
 
@@ -22,4 +22,4 @@ const Page = () => {
   )
 }
 
-export default Page
+
