@@ -86,7 +86,7 @@ const operation = (json, withTemplate) => {
           importStatement += `} from "@/pages/${_.startCase(spec.name)}";`
 
           importRoutesStatement += `});\nexport default routes;`
-          importMenuStatement += `});\nexport default routes;`
+          importMenuStatement += `};\nexport default routes;`
 
           console.log(exportComponent)
 
@@ -122,6 +122,15 @@ const operation = (json, withTemplate) => {
             bpmnName:(spec.name),
 
           }, withTemplate + '/' + scaffond_config['menuIndex']['from'] , pagesMenuTo)
+
+
+          
+
+          const startProcess = mustache.render(scaffond_config['startprocess']['to'], routeParams)
+          doGenerateSacaffond({
+            bpmnName:_.startCase(spec.name),
+
+          }, withTemplate + '/' + scaffond_config['startprocess']['from'] , startProcess)
 
 
           // console.log(routeParams, 'route params', scaffond_config['routes']['to'])

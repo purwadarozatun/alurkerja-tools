@@ -17,6 +17,10 @@
     "menuIndex": {
       "from": "menuIndex",
       "to": "src/routes"
+    },
+    "startprocess": {
+      "from": "startprocess",
+      "to": "src/pages/"
     }
   },
   "after_generate_message": "berhasil generate routes dan pages"
