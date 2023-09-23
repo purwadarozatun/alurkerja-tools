@@ -39,7 +39,7 @@ const operation = (json, withTemplate) => {
 
         var importStatement =  `import React from "react";\nimport {\n\n`
         var importRoutesStatement =  `const routes = (): { [url: string]: React.ReactNode } => ({\n`
-        var importMenuStatement =  `const routes = (): { [url: string]: React.ReactNode } => ({\n`
+        var importMenuStatement =  `const routes: { [url: string]: Array<string> } = {\n`
 
         
         
