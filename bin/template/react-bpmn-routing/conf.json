@@ -9,6 +9,10 @@
     "pagesindex": {
       "from": "pagesindex",
       "to": "src/pages/{{bpmnName}}"
+    },
+    "routeIndex": {
+      "from": "routeIndex",
+      "to": "src/routes/{{bpmnName}}_components.tsx"
     }
   },
   "after_generate_message": "berhasil generate routes dan pages"
