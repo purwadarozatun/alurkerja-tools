@@ -54,7 +54,7 @@ Message yang akan dimunculkan ketika command selesai di exsekusi bertujuan untuk
 
 
 ##  Cara Membuat Template untuk project
-
+```bash 
 cli-template
 └── sinergi-bpmn
     ├── conf.json
@@ -76,6 +76,7 @@ cli-template
             └── Start{{bpmnName}}
                 ├── Start{{bpmnName}}Create.tsx
                 └── Start{{bpmnName}}.tsx
+```
 
 
 ### Penjelasan
