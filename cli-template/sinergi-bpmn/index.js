@@ -2,15 +2,16 @@ const { default: axios } = require('axios')
 const mustache = require('mustache')
 const yargs = require('yargs')
 const _ = require('lodash')
-const { doGenerateSacaffond, titleCase, camelToSnakeCase } = require('../helper/GenerateHelper.js')
+const { doGenerateSacaffond, titleCase, camelToSnakeCase } = require('./helper.js')
 /**
  *
  * @param {*} json json diambil dari conf.json dari folder template
  * @param {*} withTemplate route tempalte
  */
 const operation = (json, withTemplate) => {
-  console.log(withTemplate, 'wth')
   const scaffond_config = json.scaffond_config
+
+
 
   var params = {}
   var valid = true
@@ -34,7 +35,7 @@ const operation = (json, withTemplate) => {
     .get(params.baseUrl + '/' + params.specPath)
     .then((response) => {
       if (response.status === 200) {
-        console.log('success getting spec')
+        console.log('success getting spec asdsad')
         const spec = response.data.data
 
         var importStatement =  `import React from "react";\nimport {\n\n`
